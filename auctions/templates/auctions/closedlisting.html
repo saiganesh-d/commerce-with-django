@@ -1,0 +1,25 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+
+      <h2 style="color: red; text-align:center;">Bid is Closed.</h2>
+      {% if list.winner == request.user.username %}
+        <h2 style="text-align:center;">Won By: <strong>You</strong> at <strong style="color: red;">${{list.price}}</strong></h2>
+      {% else %}
+        <h2 style="text-align:center;">Won By: <strong>{{list.winner}}</strong> at <strong style="color: red;">${{list.price}}</strong></h2>
+      {% endif %}
+      <img src="{{list.image}}" alt="Listing Image">
+      <hr>
+      <ul>
+        <li>Title: <strong>{{list.title}}</strong></li>
+        <li>Category: <strong>{{list.category}}</strong></li>
+        <li>Created by: <strong>{{list.owner}}</strong></li>
+        <li>Current Price: <strong>${{list.price}}</strong></li>
+      </ul>
+        <hr>
+        <h4>Description:</h4><br>
+        <p>{{list.description}}</p>
+        <br>
+    <hr>
+
+{% endblock %}

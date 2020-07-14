@@ -1,0 +1,64 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+
+    <!-- button of Watch list -->
+    <form class="" action="/addwatchlist/{{list.title}}" method="post">
+      {% csrf_token %}
+      <input class="btn btn-primary" type="submit" name="" value=" Add to Watchlist" style="background-color: green; margin: 10px;">
+    </form>
+
+  {% if list.owner ==  user.get_username %}
+      <form class="" action="/close/{{list.title}}" method="post">
+        {% csrf_token %}
+        <input class="btn btn-primary" type="submit" name="" value="Close Listing" style="background-color: red; margin: 10px;">
+      </form>
+  {% endif %}
+  <!-- Display Image -->
+  <img src="{{list.image}}" alt="Listing Image">
+    <ul>
+      <li>Title: <strong>{{list.title}}</strong></li>
+      <li>Category: <strong>{{list.category}}</strong></li>
+      <li>Created by: <strong>{{list.owner}}</strong></li>
+      <li>Current Price: <strong>${{list.price}}</strong></li>
+    </ul>
+  <hr>
+  <h4>Description:</h4><br>
+  <p>{{list.description}}</p>
+  <br>
+      <h4>Add your Bid: </h4>
+      <form class="" action="/bid/{{list.title}}" method="post">
+        {% csrf_token %}
+        <input type="text" name="bid" value="" placeholder="Bid">
+        <input class="btn btn-primary" type="submit" name="" value="Bid Now">
+      </form>
+      <hr style="top: 15px">
+      {% if bids %}
+        <h4>Bids by other users: </h4>
+      {% for bid in bids %}
+        <p>{{bid.username}} bids <strong>${{bid.bid}}</strong>.</p>
+        <hr>
+      {% endfor %}
+    {% endif %}
+      <hr style="border: 5px">
+      <h4>Comments: </h4>
+      {% if comments %}
+      {% for comment in comments %}
+        <p><strong>{{comment.username}}</strong> says:</p>
+        {{comment.comment}}
+        <hr>
+      {% endfor %}
+      {% else %}
+      <p>Be the First to Comment.</p>
+      {% endif %}
+
+      <h4>Comment:</h4>
+      <form class="" action="/viewListing/{{list.title}}" method="post">
+        {% csrf_token %}
+        <textarea class="form-control" name="comment" rows="8" cols="80" style="margin: 10px"></textarea>
+        <input class="btn btn-primary" type="submit" name="" value="Post Comment" style="margin: 10px">
+      </form>
+      <hr>
+
+
+{% endblock %}

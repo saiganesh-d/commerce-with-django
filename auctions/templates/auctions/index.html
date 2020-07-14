@@ -1,0 +1,22 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    {% if check == True %}
+      <h2 style="margin-bottom: 35px;">Active Listings:</h2>
+    {% elif check == False %}
+      <h2 style="margin-bottom: 35px;">Closed Listings:</h2>
+    {% else %}
+      <h2 style="margin-bottom: 35px;">Listings: </h2>
+    {% endif %}
+    {% if listings %}
+      {% for list in listings %}
+      <img src="{{list.image}}" alt="List Image" height="80px" style="float: left; margin: 2px 15px; ">
+        <a href="/viewListing/{{list.title}}">Title: <strong>{{list.title}}</strong></a><br>
+        Category: <strong>{{list.category}}</strong><br>
+        Price: <strong>${{list.price}}</strong>
+        <hr>
+      {% endfor %}
+    {% else %}
+        No listings right now.
+    {% endif %}
+{% endblock %}

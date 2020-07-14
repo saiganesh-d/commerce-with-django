@@ -1,0 +1,15 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+  <form class="" method="post">
+    {% csrf_token %}
+    <input autofocus class="form-control" type="text" name="title"  placeholder="Title (Must be unique)" style="margin: 10px">
+    <input class="form-control" type="text" name="price"  placeholder="Price" style="margin: 10px">
+    <textarea class="form-control" name="description" rows="8" cols="80" placeholder="Description" style="margin: 10px"></textarea>
+    <input class="form-control" type="text" name="image"  placeholder="Image Link" style="margin: 10px">
+    <input class="form-control" type="text" name="category"  placeholder="Category (Optional)" style="margin: 10px">
+    <input class="btn btn-primary" type="submit" name="" value="Create" style="margin: 10px" >
+  </form>
+
+
+{% endblock %}
